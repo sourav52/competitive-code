@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Talking Clock</title>
+</head>
+<body>
+
+</body>
+	<script type="text/javascript">
+
+		var arr = [
+			[
+				"tweleve",
+				"one",
+				"two",
+				"three",
+				"four",
+				"five",
+				"six",
+				"seven",
+				"eight",
+				"nine",
+				"ten",
+				"eleven"
+			],
+			[
+				"eleven",
+				"tweleve",
+				"thirteen",
+				"fourteen",
+				"fiftten",
+				"sixteen",
+				"seventeen",
+				"eighteen",
+				"nineteen"
+			],
+			[
+				"",
+				"",
+				"twenty",
+				"thirty",
+				"fourty",
+				"fifty",
+				"sixty"
+			]
+		];
+		var inputArr = ["00:00","01:30","12:05","14:01","20:29","21:00"];
+		for (var i = 0; i < inputArr.length; i++) {
+			// spilt it into hour and minute
+			const [h,m] = inputArr[i].split(':').map(n => parseInt(n));
+			const suffix = h>12 ? "Am" : "Pm";
+			const hour = arr[0][h%12];
+			var min = '';
+			if (m<11) {
+				if (m) {
+					min = "oh "+arr[0][m%12];
+				}
+			}
+			else if (m<20) {
+				min = arr[1][m%10];
+			}else{
+				min = arr[2][Math.floor(m/10)];
+				min += m%10==0 ? "" : " "+arr[0][m%10];
+			}
+			var words = ["It's",hour,min,suffix].join(' ');
+			console.log(words);
+		}
+	</script>
+</html>
